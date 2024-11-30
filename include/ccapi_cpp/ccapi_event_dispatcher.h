@@ -14,8 +14,10 @@
 #include "ccapi_cpp/ccapi_util_private.h"
 namespace ccapi {
 /**
- * Dispatches events from one or more Sessions through callbacks. EventDispatcher objects are optionally specified when Session objects are constructed. A
- * single EventDispatcher can be shared by multiple Session objects. The EventDispatcher provides an event-driven interface, generating callbacks from one or
+ * Dispatches events from one or more Sessions through callbacks.
+ * EventDispatcher objects are optionally specified when Session objects are constructed. A
+ * single EventDispatcher can be shared by multiple Session objects.
+ * The EventDispatcher provides an event-driven interface, generating callbacks from one or
  * more internal threads for one or more sessions.
  */
 

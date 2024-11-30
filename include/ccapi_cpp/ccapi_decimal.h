@@ -84,6 +84,10 @@ class Decimal CCAPI_FINAL {
       }
     }
   }
+  /**
+   * convert the decimal to string
+   * @return
+   */
   std::string toString() const {
     std::string stringValue;
     if (!this->sign) {
@@ -96,7 +100,17 @@ class Decimal CCAPI_FINAL {
     }
     return stringValue;
   }
+  /**
+   * convert this decimal to double
+   * @return
+   */
   double toDouble() const { return std::stod(this->toString()); }
+  /**
+   * compare two Decimal
+   * @param l
+   * @param r
+   * @return
+   */
   friend bool operator<(const Decimal& l, const Decimal& r) {
     if (l.sign && r.sign) {
       if (l.before < r.before) {
@@ -125,7 +139,11 @@ class Decimal CCAPI_FINAL {
   friend bool operator>(const Decimal& l, const Decimal& r) { return r < l; }
   friend bool operator<=(const Decimal& l, const Decimal& r) { return !(l > r); }
   friend bool operator>=(const Decimal& l, const Decimal& r) { return !(l < r); }
-  friend bool operator==(const Decimal& l, const Decimal& r) { return !(l > r) && !(l < r); }
+  // friend bool operator==(const Decimal& l, const Decimal& r) { return !(l > r) && !(l < r); }
+  // todo maybe more efficient using this one
+  friend bool operator==(const Decimal& l, const Decimal& r) {
+    return l.sign == r.sign && l.before == r.before && l.frac == r.frac;
+  }
   friend bool operator!=(const Decimal& l, const Decimal& r) { return !(l == r); }
   Decimal negate() const {
     Decimal o;

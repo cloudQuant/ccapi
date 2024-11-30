@@ -59,4 +59,5 @@ class SessionOptions CCAPI_FINAL {
 #endif
 };
 } /* namespace ccapi */
+
 #endif  // INCLUDE_CCAPI_CPP_CCAPI_SESSION_OPTIONS_H_

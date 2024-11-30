@@ -3,6 +3,9 @@
 #ifndef CCAPI_DECOMPRESS_BUFFER_SIZE
 #define CCAPI_DECOMPRESS_BUFFER_SIZE 1 << 20
 #endif
+#include "boost/system/error_code.hpp"
+#include "boost/system/system_error.hpp"
+#include "ccapi_cpp/ccapi_logger.h"
 #include "zlib.h"
 namespace ccapi {
 /**
@@ -51,26 +54,69 @@ class InflateStream CCAPI_FINAL {
     this->initialized = true;
     return boost::system::error_code();
   }
+//  boost::system::error_code decompress(uint8_t const *buf, size_t len, std::string &out) {
+//    if (!this->initialized) {
+//      CCAPI_LOGGER_ERROR("decompress error");
+//      return boost::system::error_code();
+//    }
+//    int ret;
+//    this->istate.avail_in = len;
+//    this->istate.next_in = const_cast<unsigned char *>(buf);
+//    do {
+//      this->istate.avail_out = this->decompressBufferSize;
+//      this->istate.next_out = this->buffer.get();
+//      int ret = inflate(&this->istate, Z_SYNC_FLUSH);
+//      if (ret == Z_NEED_DICT || ret == Z_DATA_ERROR || ret == Z_MEM_ERROR) {
+//        CCAPI_LOGGER_ERROR("decompress error");
+//        return boost::system::error_code();
+//      }
+//      out.append(reinterpret_cast<char *>(this->buffer.get()), this->decompressBufferSize - this->istate.avail_out);
+//    } while (this->istate.avail_out == 0);
+//    return boost::system::error_code();
+//  }
   boost::system::error_code decompress(uint8_t const *buf, size_t len, std::string &out) {
     if (!this->initialized) {
-      CCAPI_LOGGER_ERROR("decompress error");
-      return boost::system::error_code();
+      CCAPI_LOGGER_ERROR("decompress error: InflateStream not initialized");
+      std::cout << "decompress error: InflateStream not initialized" << std::endl;
+      return boost::system::error_code(boost::system::errc::state_not_recoverable, boost::system::system_category());
     }
     int ret;
     this->istate.avail_in = len;
     this->istate.next_in = const_cast<unsigned char *>(buf);
+
     do {
       this->istate.avail_out = this->decompressBufferSize;
       this->istate.next_out = this->buffer.get();
-      int ret = inflate(&this->istate, Z_SYNC_FLUSH);
+      ret = inflate(&this->istate, Z_SYNC_FLUSH);
+
       if (ret == Z_NEED_DICT || ret == Z_DATA_ERROR || ret == Z_MEM_ERROR) {
-        CCAPI_LOGGER_ERROR("decompress error");
-        return boost::system::error_code();
+        CCAPI_LOGGER_ERROR("decompress error: " + std::string(zError(ret)));
+        std::cout << "decompress error1 : " << std::string(zError(ret)) << std::endl;
+        return boost::system::error_code(boost::system::errc::io_error, boost::system::system_category());
       }
-      out.append(reinterpret_cast<char *>(this->buffer.get()), this->decompressBufferSize - this->istate.avail_out);
+
+      size_t decompressedSize = this->decompressBufferSize - this->istate.avail_out;
+      out.append(reinterpret_cast<char *>(this->buffer.get()), decompressedSize);
+
+      // 打印调试信息
+      std::cout << "Decompressed size: " << decompressedSize << std::endl;
+      std::cout << "Decompressed data: ";
+      for (size_t i = 0; i < decompressedSize; i++) {
+        std::cout << this->buffer.get()[i];
+      }
+      std::cout << std::endl;
+
     } while (this->istate.avail_out == 0);
+
+    if (ret != Z_OK && ret != Z_STREAM_END) {
+      CCAPI_LOGGER_ERROR("decompress error: " + std::string(zError(ret)));
+      std::cout << "decompress error 2: " << std::string(zError(ret)) << std::endl;
+      return boost::system::error_code(boost::system::errc::io_error, boost::system::system_category());
+    }
+
     return boost::system::error_code();
   }
+
   boost::system::error_code inflate_reset() {
     int ret = inflateReset(&this->istate);
     if (ret != Z_OK) {

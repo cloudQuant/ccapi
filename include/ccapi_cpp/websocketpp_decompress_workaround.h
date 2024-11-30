@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <sstream>
 #include <websocketpp/common/cpp11.hpp>
 #include <websocketpp/common/memory.hpp>
 #include <websocketpp/common/platforms.hpp>
@@ -11,6 +12,9 @@
 #include <websocketpp/common/system_error.hpp>
 #include <websocketpp/error.hpp>
 #include <websocketpp/extensions/extension.hpp>
+#include <websocketpp/http/constants.hpp>
+#include <websocketpp/error.hpp>
+#include <websocketpp/common/memory.hpp>
 
 #include "zlib.h"
 

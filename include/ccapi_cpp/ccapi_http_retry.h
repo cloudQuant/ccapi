@@ -2,6 +2,7 @@
 #define INCLUDE_CCAPI_CPP_CCAPI_HTTP_RETRY_H_
 #include <future>
 #include <string>
+#include "ccapi_cpp/ccapi_logger.h"
 namespace ccapi {
 /**
  * This class is used for retrying http requests for the REST API.

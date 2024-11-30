@@ -1,0 +1,12 @@
+#include <gtest/gtest.h>
+#include "ccapi_cpp/websocketpp_decompress_workaround.h"
+#include "websocketpp/extensions/permessage_deflate/enabled.hpp"
+#include <websocketpp/http/request.hpp>
+#include <websocketpp/http/response.hpp>
+#include <websocketpp/error.hpp>
+#include <websocketpp/common/memory.hpp>
+#include <websocketpp/common/system_error.hpp>
+#include <websocketpp/http/constants.hpp>
+#include <zlib.h>
+#include "websocketpp/extensions/permessage_deflate/enabled.hpp"
+#include <sstream>

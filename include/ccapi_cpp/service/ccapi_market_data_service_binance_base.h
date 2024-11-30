@@ -138,6 +138,9 @@ class MarketDataServiceBinanceBase : public MarketDataService {
           for (const auto& exchangeSubscriptionId : this->exchangeSubscriptionIdListByConnectionIdExchangeJsonPayloadIdMap.at(wsConnection.id).at(id)) {
             std::string channelId = this->channelIdSymbolIdByConnectionIdExchangeSubscriptionIdMap[wsConnection.id][exchangeSubscriptionId][CCAPI_CHANNEL_ID];
             std::string symbolId = this->channelIdSymbolIdByConnectionIdExchangeSubscriptionIdMap[wsConnection.id][exchangeSubscriptionId][CCAPI_SYMBOL_ID];
+            // todo
+//            std::cout << "message channelId = " << channelId << std::endl;
+//            std::cout << "message symbolId = " << symbolId << std::endl;
             if (this->correlationIdListByConnectionIdChannelIdSymbolIdMap.at(wsConnection.id).find(channelId) !=
                 this->correlationIdListByConnectionIdChannelIdSymbolIdMap.at(wsConnection.id).end()) {
               if (this->correlationIdListByConnectionIdChannelIdSymbolIdMap.at(wsConnection.id).at(channelId).find(symbolId) !=
@@ -162,6 +165,10 @@ class MarketDataServiceBinanceBase : public MarketDataService {
       std::string exchangeSubscriptionId = document["stream"].GetString();
       std::string channelId = this->channelIdSymbolIdByConnectionIdExchangeSubscriptionIdMap[wsConnection.id][exchangeSubscriptionId][CCAPI_CHANNEL_ID];
       std::string symbolId = this->channelIdSymbolIdByConnectionIdExchangeSubscriptionIdMap[wsConnection.id][exchangeSubscriptionId][CCAPI_SYMBOL_ID];
+      // todo
+//      std::cout << "exchangeSubscriptionId = " << exchangeSubscriptionId << std::endl;
+//      std::cout << "MarketDataMessage channelId = " << channelId << std::endl;
+//      std::cout << "MarketDataMessage symbolId = " << symbolId << std::endl;
       auto optionMap = this->optionMapByConnectionIdChannelIdSymbolIdMap[wsConnection.id][channelId][symbolId];
       const rj::Value& data = document["data"];
       if (channelId == CCAPI_WEBSOCKET_BINANCE_BASE_CHANNEL_BOOK_TICKER) {

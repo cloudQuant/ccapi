@@ -1148,6 +1148,7 @@ class MarketDataService : public Service {
       message.setRecapType(Message::RecapType::SOLICITED);
       message.setTime(tp);
       message.setElementList(elementList);
+      message.setSymbolId(symbolId);
       message.setCorrelationIdList(correlationIdList);
       std::vector<Message> newMessageList = {message};
       event.addMessages(newMessageList);
@@ -1287,6 +1288,7 @@ class MarketDataService : public Service {
           message.setTime(time);
           message.setElementList(elementList);
           message.setCorrelationIdList(correlationIdList);
+          message.setSymbolId(symbolId);
           messageList.emplace_back(std::move(message));
         }
         if (!messageList.empty()) {
@@ -1346,6 +1348,7 @@ class MarketDataService : public Service {
         message.setTime(time);
         message.setElementList(elementList);
         message.setCorrelationIdList(correlationIdList);
+        message.setSymbolId(symbolId);
         messageList.emplace_back(std::move(message));
       }
       if (!messageList.empty()) {
@@ -1374,6 +1377,7 @@ class MarketDataService : public Service {
       message.setTime(tp);
       message.setElementList(elementList);
       message.setCorrelationIdList(correlationIdList);
+      message.setSymbolId(symbolId);
       messageList.emplace_back(std::move(message));
     }
     if (!messageList.empty()) {

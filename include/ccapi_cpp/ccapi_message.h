@@ -7,10 +7,14 @@
 #include "ccapi_cpp/ccapi_logger.h"
 namespace ccapi {
 /**
- * A handle to a single message. Message objects are obtained from the getMessageList() function of the Event object. Each Message is associated with one or
- * more correlation id values. The Message contents are represented as Elements and can be accessed via the getElementList() function. Each Message object
- * consists of an Type attribute and a RecapType attribute. The exchange timestamp (if any) associated with the Messsage object can be retrieved via the
- * getTime() function. The library timestamp can be retrieved via the getTimeReceived() function.
+ * A handle to a single message. Message objects are obtained from the getMessageList()
+ * function of the Event object. Each Message is associated with one or
+ * more correlation id values. The Message contents are represented as Elements and
+ * can be accessed via the getElementList() function. Each Message object
+ * consists of an Type attribute and a RecapType attribute.
+ * The exchange timestamp (if any) associated with the Messsage object
+ * can be retrieved via the getTime() function.
+ * The library timestamp can be retrieved via the getTimeReceived() function.
  */
 class Message CCAPI_FINAL {
  public:
@@ -253,6 +257,8 @@ class Message CCAPI_FINAL {
   void setRecapType(RecapType recapType) { this->recapType = recapType; }
   Type getType() const { return type; }
   void setType(Type type) { this->type = type; }
+  std::string getSymbolId() const {return symbolId;}
+  void setSymbolId(std::string symbolId_){this->symbolId = symbolId_;}
   // 'getTimeReceived' only works in C++. For other languages, please use 'getTimeReceivedISO'.
   TimePoint getTimeReceived() const { return timeReceived; }
   std::string getTimeReceivedISO() const { return UtilTime::getISOTimestamp(timeReceived); }
@@ -270,6 +276,7 @@ class Message CCAPI_FINAL {
   std::map<std::string, std::string> secondaryCorrelationIdMap;
   Type type{Type::UNKNOWN};
   RecapType recapType{RecapType::UNKNOWN};
+  std::string symbolId;
 };
 } /* namespace ccapi */
 #endif  // INCLUDE_CCAPI_CPP_CCAPI_MESSAGE_H_

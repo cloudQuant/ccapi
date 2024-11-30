@@ -4,7 +4,7 @@
 #include <map>
 #include <mutex>
 #include <string>
-
+#include "ccapi_cpp/ccapi_logger.h" // todo need to add this file
 #include "ccapi_cpp/ccapi_macro.h"
 #include "ccapi_cpp/ccapi_util_private.h"
 // We use macros instead of static constants in the Request class so that SWIG can properly generate C# bindings

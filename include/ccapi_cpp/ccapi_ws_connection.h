@@ -2,7 +2,6 @@
 #define INCLUDE_CCAPI_CPP_CCAPI_WS_CONNECTION_H_
 #ifdef CCAPI_LEGACY_USE_WEBSOCKETPP
 #include <string>
-
 #include "ccapi_cpp/ccapi_logger.h"
 #include "ccapi_cpp/ccapi_subscription.h"
 namespace wspp = websocketpp;
@@ -77,9 +76,12 @@ class WsConnection CCAPI_FINAL {
 } /* namespace ccapi */
 #else
 #include <string>
-
 #include "ccapi_cpp/ccapi_logger.h"
 #include "ccapi_cpp/ccapi_subscription.h"
+#include "boost/beast/core.hpp"
+#include "boost/beast/websocket.hpp"
+#include "boost/beast/ssl.hpp"
+namespace beast = boost::beast;
 namespace ccapi {
 /**
  * This class represents a TCP socket connection for the websocket API.

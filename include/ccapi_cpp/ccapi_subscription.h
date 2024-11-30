@@ -2,7 +2,6 @@
 #define INCLUDE_CCAPI_CPP_CCAPI_SUBSCRIPTION_H_
 #include <set>
 #include <string>
-
 #include "ccapi_cpp/ccapi_logger.h"
 #include "ccapi_cpp/ccapi_macro.h"
 #include "ccapi_cpp/ccapi_util_private.h"

@@ -92,4 +92,5 @@ class Queue {
   size_t maxSize{};
 };
 } /* namespace ccapi */
+
 #endif  // INCLUDE_CCAPI_CPP_CCAPI_QUEUE_H_

@@ -1,0 +1,14 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/yunjinqi/Documents/ccapi/tests -B /Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
+-- RapidJSON found. Headers: /Users/yunjinqi/vcpkg/installed/arm64-osx/share/rapidjson/../../include
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug

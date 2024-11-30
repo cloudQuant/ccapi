@@ -1,5 +1,6 @@
 #ifndef INCLUDE_CCAPI_CPP_CCAPI_MARKET_DATA_MESSAGE_H_
 #define INCLUDE_CCAPI_CPP_CCAPI_MARKET_DATA_MESSAGE_H_
+
 #include "ccapi_cpp/ccapi_logger.h"
 #include "ccapi_cpp/ccapi_util_private.h"
 // #include "ccapi_message.h"

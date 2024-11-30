@@ -1,0 +1,4 @@
+/Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug/CMakeFiles/ccapi_test.dir
+/Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug/CMakeFiles/test.dir
+/Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/yunjinqi/Documents/ccapi/tests/cmake-build-debug/CMakeFiles/rebuild_cache.dir

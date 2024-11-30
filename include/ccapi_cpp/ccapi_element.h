@@ -51,4 +51,5 @@ class Element CCAPI_FINAL {
   std::map<int, std::string> tagValueMap;
 };
 } /* namespace ccapi */
+
 #endif  // INCLUDE_CCAPI_CPP_CCAPI_ELEMENT_H_

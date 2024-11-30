@@ -11,7 +11,11 @@ namespace ccapi {
  */
 class Url CCAPI_FINAL {
  public:
-  explicit Url(std::string urlStr) {
+  /**
+   * explicit construction
+   * @param urlStr
+   */
+  explicit Url(const std::string& urlStr) {
     std::regex ex("^(.*:)//([A-Za-z0-9\\-\\.]+)(:[0-9]+)?(.*)$");
     std::cmatch what;
     if (std::regex_match(urlStr.c_str(), what, ex)) {
@@ -68,6 +72,11 @@ class Url CCAPI_FINAL {
     }
     return output;
   }
+  /**
+   * convert map to query string
+   * @param input
+   * @return
+   */
   static std::string convertMapToQueryString(const std::map<std::string, std::string> &input) {
     std::string output;
     for (const auto &x : input) {
@@ -81,6 +90,11 @@ class Url CCAPI_FINAL {
     }
     return output;
   }
+  /**
+   * convert a map to encoded form of url
+   * @param input
+   * @return
+   */
   static std::string convertMapToFormUrlEncoded(const std::map<std::string, std::string> &input) {
     std::string output;
     int i = 0;
@@ -91,9 +105,16 @@ class Url CCAPI_FINAL {
       if (i < input.size() - 1) {
         output += "&";
       }
+      //todo fix bug using ++i, if no ++i, it will end with &
+      ++i;
     }
     return output;
   }
+  /**
+   * convert encoded url to map
+   * @param input
+   * @return
+   */
   static std::map<std::string, std::string> convertFormUrlEncodedToMap(const std::string &input) {
     std::map<std::string, std::string> output;
     for (const auto &x : UtilString::split(input, "&")) {

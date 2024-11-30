@@ -1224,4 +1224,5 @@
 #ifndef CCAPI_BITMART_BROKER_ID
 #define CCAPI_BITMART_BROKER_ID "cryptochassis01"
 #endif
+
 #endif  // INCLUDE_CCAPI_CPP_CCAPI_MACRO_H_

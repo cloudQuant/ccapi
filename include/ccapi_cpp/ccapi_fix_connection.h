@@ -4,6 +4,10 @@
 
 #include "ccapi_cpp/ccapi_logger.h"
 #include "ccapi_cpp/ccapi_subscription.h"
+// todo need to add these files
+#include "boost/beast/core.hpp"
+#include "boost/beast/http.hpp"
+#include "boost/beast/version.hpp"
 namespace beast = boost::beast;
 namespace ccapi {
 /**
