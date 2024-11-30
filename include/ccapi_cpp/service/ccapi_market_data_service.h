@@ -1020,6 +1020,20 @@ class MarketDataService : public Service {
                 element.emplace(k3, it->second);
               }
             }
+            {
+              auto it = y.find(MarketDataMessage::DataFieldType::AGG_TRADE_FIRST_ID);
+              if (it != y.end()) {
+                std::string k31(CCAPI_AGG_TRADE_FIRST_ID);
+                element.emplace(k31, it->second);
+              }
+            }
+            {
+              auto it = y.find(MarketDataMessage::DataFieldType::AGG_TRADE_LAST_ID);
+              if (it != y.end()) {
+                std::string k32(CCAPI_AGG_TRADE_LAST_ID);
+                element.emplace(k32, it->second);
+              }
+            }
             std::string k4(CCAPI_IS_BUYER_MAKER);
             element.emplace(k4, y.at(MarketDataMessage::DataFieldType::IS_BUYER_MAKER));
             {

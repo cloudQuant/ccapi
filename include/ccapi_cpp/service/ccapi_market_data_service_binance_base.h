@@ -248,6 +248,8 @@ class MarketDataServiceBinanceBase : public MarketDataService {
         dataPoint.insert({MarketDataMessage::DataFieldType::PRICE, UtilString::normalizeDecimalString(std::string(data["p"].GetString()))});
         dataPoint.insert({MarketDataMessage::DataFieldType::SIZE, UtilString::normalizeDecimalString(std::string(data["q"].GetString()))});
         dataPoint.insert({MarketDataMessage::DataFieldType::AGG_TRADE_ID, data["a"].GetString()});
+        dataPoint.insert({MarketDataMessage::DataFieldType::AGG_TRADE_FIRST_ID, data["f"].GetString()});
+        dataPoint.insert({MarketDataMessage::DataFieldType::AGG_TRADE_LAST_ID, data["l"].GetString()});
         dataPoint.insert({MarketDataMessage::DataFieldType::IS_BUYER_MAKER, data["m"].GetBool() ? "1" : "0"});
         marketDataMessage.data[MarketDataMessage::DataType::AGG_TRADE].emplace_back(std::move(dataPoint));
         marketDataMessageList.emplace_back(std::move(marketDataMessage));

@@ -30,16 +30,26 @@ class MyEventHandler : public EventHandler {
     }
     std::cout << "]" << std::endl;
   }
+
+  void save_binance_agg_trade_data(Message & msg){
+    std::string symbol_id = msg.getSymbolId();
+    std::string server_time = msg.getTimeISO();
+    std::string local_update_time = msg.getTimeReceivedISO();
+    // {AGG_TRADE_ID=1889900445, IS_BUYER_MAKER=1, LAST_PRICE=3686.73, LAST_SIZE=0.012}
+    std::cout <<"agg_trade " <<  symbol_id << " " << server_time << " " << local_update_time << std::endl;
+  }
   bool processEvent(const Event& event, Session* session) override {
     // std::cout << toString(event) + "\n" << std::endl;
     std::vector<Message> msgs = event.getMessageList();
     Message msg = msgs[0];
-    // 如果订阅的是depth数据
-//    if (correlationIdList.size() && correlationIdList[0].find("depth")!=std::string::npos){
-//       save_binance_depth_data(msg);
-//    }
+    // 如果订阅的是
     if (msg.getType() == Message::Type::MARKET_DATA_EVENTS_MARKET_DEPTH){
       save_binance_depth_data(msg);
+    }
+    // 如果是归集交易(agg_trade)
+    if (msg.getType() == Message::Type::MARKET_DATA_EVENTS_AGG_TRADE){
+      save_binance_agg_trade_data(msg);
+      std::cout << toString(event) + "\n" << std::endl;
     }
 
     return true;
@@ -71,9 +81,12 @@ int main(int argc, char** argv) {
     MyEventHandler eventHandler;
     EventDispatcher eventDispatcher(2);
     Session session(sessionOptions, sessionConfigs, &eventHandler, &eventDispatcher);
-    Subscription subscription0("binance-usds-futures", "btcusdt", "MARKET_DEPTH", "MARKET_DEPTH_MAX=20", "depth__btcusdt");
-    Subscription subscription1("binance-usds-futures", "ethusdt", "MARKET_DEPTH", "MARKET_DEPTH_MAX=20", "depth__ethusdt");
-    std::vector<Subscription> subscription_list = {subscription0, subscription1};
+    Subscription s0("binance-usds-futures", "btcusdt", "MARKET_DEPTH", "MARKET_DEPTH_MAX=20", "depth");
+    Subscription s1("binance-usds-futures", "ethusdt", "MARKET_DEPTH", "MARKET_DEPTH_MAX=20", "depth");
+    Subscription s2("binance-usds-futures", "btcusdt", "AGG_TRADE", "", "agg_trade");
+    Subscription s3("binance-usds-futures", "ethusdt", "AGG_TRADE", "", "agg_trade");
+
+    std::vector<Subscription> subscription_list = {s0, s1, s2, s3};
     session.subscribe(subscription_list);
     std::this_thread::sleep_for(std::chrono::seconds(2));
     session.stop();

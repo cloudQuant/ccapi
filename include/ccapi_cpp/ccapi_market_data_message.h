@@ -84,6 +84,8 @@ class MarketDataMessage CCAPI_FINAL {
     CLOSE_PRICE = 9,
     VOLUME = 10,
     QUOTE_VOLUME = 11,
+    AGG_TRADE_FIRST_ID = 12,
+    AGG_TRADE_LAST_ID = 13,
   };
   static std::string dataFieldTypeToString(DataFieldType dataFieldType) {
     std::string output;
@@ -123,6 +125,12 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case DataFieldType::QUOTE_VOLUME:
         output = "QUOTE_VOLUME";
+        break;
+      case DataFieldType::AGG_TRADE_FIRST_ID:
+        output = "AGG_TRADE_FIRST_ID";
+        break;
+      case DataFieldType::AGG_TRADE_LAST_ID:
+        output = "AGG_TRADE_LAST_ID";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);
