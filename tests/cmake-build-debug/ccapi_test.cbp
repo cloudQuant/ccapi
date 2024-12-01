@@ -130,6 +130,276 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_ascendex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance_coin_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance_derivatives_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance_us.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_binance_usds_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitfinex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitget.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitget_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitget_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitmart.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitmex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bitstamp.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_bybit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_coinbase.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_cryptocom.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_deribit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_erisx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_ftx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_ftx_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_ftx_us.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_gateio.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_gateio_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_gateio_perpetual_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_gemini.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_huobi.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_huobi_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_huobi_coin_swap.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_huobi_derivatives_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_huobi_usdt_swap.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_kraken.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_kraken_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_kucoin.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_kucoin_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_kucoin_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_mexc.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_mexc_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_okx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_execution_management_service_whitebit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service_coinbase.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service_ftx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service_ftx_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service_ftx_us.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_fix_service_gemini.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_ascendex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance_coin_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance_derivatives_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance_us.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_binance_usds_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitfinex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitget.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitget_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitget_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitmart.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitmex.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bitstamp.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_bybit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_coinbase.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_cryptocom.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_deribit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_erisx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_ftx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_ftx_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_ftx_us.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_gateio.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_gateio_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_gateio_perpetual_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_gemini.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_huobi.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_huobi_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_huobi_coin_swap.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_huobi_derivatives_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_huobi_usdt_swap.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_kraken.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_kraken_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_kucoin.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_kucoin_base.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_kucoin_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_mexc.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_mexc_futures.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_okx.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_market_data_service_whitebit.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_service.h">
+			<Option target="ccapi_test"/>
+		</Unit>
+		<Unit filename="/Users/yunjinqi/Documents/ccapi/include/ccapi_cpp/service/ccapi_service_context.h">
+			<Option target="ccapi_test"/>
+		</Unit>
 		<Unit filename="/Users/yunjinqi/Documents/ccapi/tests/ccapi_cpp/init_googletest.cpp">
 			<Option target="ccapi_test"/>
 		</Unit>

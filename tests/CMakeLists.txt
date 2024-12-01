@@ -28,10 +28,14 @@ file(GLOB_RECURSE TEST_SOURCES "ccapi_cpp/*.cpp")
 if(TEST_SOURCES STREQUAL "")
     message(FATAL_ERROR "No source files found in the tests/ directory")
 endif()
+# 自动查找 service 目录下的所有文件
+file(GLOB_RECURSE SERVICE_SOURCES "${CMAKE_SOURCE_DIR}/../include/ccapi_cpp/service/*.h" "${CMAKE_SOURCE_DIR}/../include/ccapi_cpp/service/*.cpp")
 
 # 定义可执行文件目标并传入源文件
-add_executable(${PROJECT_NAME} ${TEST_SOURCES}
-)
+add_executable(${PROJECT_NAME} ${TEST_SOURCES} ${SERVICE_SOURCES})
+## 定义可执行文件目标并传入源文件
+#add_executable(${PROJECT_NAME} ${TEST_SOURCES}
+#)
 target_link_libraries(${PROJECT_NAME} PRIVATE
                                             ${Boost_LIBRARIES}
                                             GTest::gtest
@@ -50,7 +54,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # gtest_discover_tests(btcpp_test)
 add_test(AllTestsInMain main)
-
 
 
 

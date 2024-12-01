@@ -209,11 +209,14 @@ class MarketDataService : public Service {
   void processMarketDataMessageList(WsConnection& wsConnection, wspp::connection_hdl hdl, const std::string& textMessage, const TimePoint& timeReceived,
                                     Event& event, std::vector<MarketDataMessage>& marketDataMessageList) {
     CCAPI_LOGGER_TRACE("marketDataMessageList = " + toString(marketDataMessageList));
+    std::cout << " websocketpp marketDataMessageList = " << toString(marketDataMessageList) << std::endl;
     event.setType(Event::Type::SUBSCRIPTION_DATA);
     for (auto& marketDataMessage : marketDataMessageList) {
       if (marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARKET_DEPTH ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_TRADE ||
-          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_AGG_TRADE) {
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_AGG_TRADE||
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARK_PRICE) {
+
         if (this->sessionOptions.warnLateEventMaxMilliseconds > 0 &&
             std::chrono::duration_cast<std::chrono::milliseconds>(timeReceived - marketDataMessage.tp).count() >
                 this->sessionOptions.warnLateEventMaxMilliseconds &&
@@ -284,8 +287,7 @@ class MarketDataService : public Service {
           bool isSolicited = marketDataMessage.recapType == MarketDataMessage::RecapType::SOLICITED;
           this->processTrade(wsConnection, channelId, symbolId, event, marketDataMessage.tp, timeReceived, marketDataMessage.data, field, optionMap,
                              correlationIdList, isSolicited);
-        }
-      } else {
+        }else {
         CCAPI_LOGGER_WARN("websocket event type is unknown for " + toString(marketDataMessage));
         CCAPI_LOGGER_WARN("textMessage is " + textMessage);
       }
@@ -294,10 +296,12 @@ class MarketDataService : public Service {
   void onTextMessage(wspp::connection_hdl hdl, const std::string& textMessage, const TimePoint& timeReceived) override {
     CCAPI_LOGGER_FUNCTION_ENTER;
     WsConnection& wsConnection = this->getWsConnectionFromConnectionPtr(this->serviceContextPtr->tlsClientPtr->get_con_from_hdl(hdl));
+    //std::cout << "ccapi_market_data_service.h->onTextMessage " << " run success" << std::endl;
     if (this->correlationIdByConnectionIdMap.find(wsConnection.id) == this->correlationIdByConnectionIdMap.end()) {
       Event event;
       std::vector<MarketDataMessage> marketDataMessageList;
       this->processTextMessage(wsConnection, hdl, textMessage, timeReceived, event, marketDataMessageList);
+
       if (!marketDataMessageList.empty()) {
         this->processMarketDataMessageList(wsConnection, hdl, textMessage, timeReceived, event, marketDataMessageList);
       }
@@ -464,13 +468,15 @@ class MarketDataService : public Service {
   void processMarketDataMessageList(std::shared_ptr<WsConnection> wsConnectionPtr, boost::beast::string_view textMessage, const TimePoint& timeReceived,
                                     Event& event, std::vector<MarketDataMessage>& marketDataMessageList) {
     CCAPI_LOGGER_TRACE("marketDataMessageList = " + toString(marketDataMessageList));
+    // std::cout << "1 marketDataMessageList =  "  << toString(marketDataMessageList) << std::endl;
     WsConnection& wsConnection = *wsConnectionPtr;
     event.setType(Event::Type::SUBSCRIPTION_DATA);
     for (auto& marketDataMessage : marketDataMessageList) {
       if (marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARKET_DEPTH ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_TRADE ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_AGG_TRADE ||
-          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_CANDLESTICK) {
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_CANDLESTICK ||
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARK_PRICE) {
         // if (this->sessionOptions.warnLateEventMaxMilliseconds > 0 &&
         //     std::chrono::duration_cast<std::chrono::milliseconds>(timeReceived - marketDataMessage.tp).count() >
         //         this->sessionOptions.warnLateEventMaxMilliseconds &&
@@ -552,6 +558,11 @@ class MarketDataService : public Service {
         if (marketDataMessage.data.find(MarketDataMessage::DataType::CANDLESTICK) != marketDataMessage.data.end()) {
           bool isSolicited = marketDataMessage.recapType == MarketDataMessage::RecapType::SOLICITED;
           this->processExchangeProvidedCandlestick(wsConnection, channelId, symbolId, event, marketDataMessage.tp, timeReceived, marketDataMessage.data, field,
+                                                   optionMap, correlationIdList, isSolicited);
+        }
+        if (marketDataMessage.data.find(MarketDataMessage::DataType::MARK_PRICE) != marketDataMessage.data.end()){
+          bool isSolicited = marketDataMessage.recapType == MarketDataMessage::RecapType::SOLICITED;
+          this->processExchangeProvidedMarkPrice(wsConnection, channelId, symbolId, event, marketDataMessage.tp, timeReceived, marketDataMessage.data, field,
                                                    optionMap, correlationIdList, isSolicited);
         }
       } else {
@@ -1416,6 +1427,60 @@ class MarketDataService : public Service {
       event.addMessages(messageList);
     }
   }
+
+  void processExchangeProvidedMarkPrice(const WsConnection& wsConnection, const std::string& channelId, const std::string& symbolId, Event& event,
+                                          const TimePoint& tp, const TimePoint& timeReceived, MarketDataMessage::TypeForData& input, const std::string& field,
+                                          const std::map<std::string, std::string>& optionMap, const std::vector<std::string>& correlationIdList,
+                                          bool isSolicited) {
+    std::vector<Message> messageList;
+    std::vector<Element> elementList;
+    if (field == CCAPI_MARK_PRICE) {
+      for (auto& x : input) {
+        auto& type = x.first;
+        auto& detail = x.second;
+        // std::cout << "type = " << MarketDataMessage::dataTypeToString(type) << std::endl;
+        // std::vector<std::map<DataFieldType, std::string> >
+        // std::cout << "detail size = " << detail.size() << std::endl;
+        if (type == MarketDataMessage::DataType::MARK_PRICE) {
+          for (auto& y : detail) {
+            auto& mark_price = y.at(MarketDataMessage::DataFieldType::MARK_PRICE);
+            auto& spot_index_price = y.at(MarketDataMessage::DataFieldType::SPOT_INDEX_PRICE);
+            auto& predicted_settlement_price = y.at(MarketDataMessage::DataFieldType::PREDICTED_SETTLEMENT_PRICE);
+            auto& funding_rate = y.at(MarketDataMessage::DataFieldType::FUNDING_RATE);
+            auto& next_funding_rate_time = y.at(MarketDataMessage::DataFieldType:: NEXT_FUNDING_RATE_TIME);
+            Element element;
+            std::string k1("mark_price");
+            std::string k2("spot_index_price");
+            std::string k3("predicted_settlement_price");
+            std::string k4("funding_rate");
+            std::string k5("next_funding_rate_time");
+            element.emplace(k1, mark_price);
+            element.emplace(k2, spot_index_price);
+            element.emplace(k3, predicted_settlement_price);
+            element.emplace(k4, funding_rate);
+            element.emplace(k5, next_funding_rate_time);
+            elementList.emplace_back(std::move(element));
+          }
+        } else {
+          CCAPI_LOGGER_WARN("extra type " + MarketDataMessage::dataTypeToString(type));
+        }
+      }
+    }
+    if (!elementList.empty()) {
+      Message message;
+      message.setTimeReceived(timeReceived);
+      message.setType(Message::Type::MARKET_DATA_EVENTS_MARK_PRICE);
+      message.setRecapType(isSolicited ? Message::RecapType::SOLICITED : Message::RecapType::NONE);
+      message.setTime(tp);
+      message.setElementList(elementList);
+      message.setCorrelationIdList(correlationIdList);
+      message.setSymbolId(symbolId);
+      messageList.emplace_back(std::move(message));
+    }
+    if (!messageList.empty()) {
+      event.addMessages(messageList);
+    }
+  }
   void updateCalculatedCandlestick(const WsConnection& wsConnection, const std::string& channelId, const std::string& symbolId, const std::string& field,
                                    const MarketDataMessage::TypeForData& input) {
     if (field == CCAPI_TRADE || field == CCAPI_AGG_TRADE) {
@@ -1638,6 +1703,7 @@ class MarketDataService : public Service {
   void processMarketDataMessageList(const Request& request, const std::string& textMessage, const TimePoint& timeReceived, Event& event,
                                     std::vector<MarketDataMessage>& marketDataMessageList) {
     CCAPI_LOGGER_TRACE("marketDataMessageList = " + toString(marketDataMessageList));
+    std::cout << "00 marketDataMessageList =" << toString(marketDataMessageList) << std::endl;
     for (auto& marketDataMessage : marketDataMessageList) {
       if (marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARKET_DEPTH ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_TRADE ||

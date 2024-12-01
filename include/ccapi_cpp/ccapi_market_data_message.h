@@ -18,6 +18,7 @@ class MarketDataMessage CCAPI_FINAL {
     MARKET_DATA_EVENTS_TRADE,
     MARKET_DATA_EVENTS_AGG_TRADE,
     MARKET_DATA_EVENTS_CANDLESTICK,
+    MARKET_DATA_EVENTS_MARK_PRICE,
   };
   enum class RecapType {
     UNKNOWN,
@@ -47,6 +48,7 @@ class MarketDataMessage CCAPI_FINAL {
     TRADE = 2,
     AGG_TRADE = 3,
     CANDLESTICK = 4,
+    MARK_PRICE = 5,
   };
   static std::string dataTypeToString(DataType dataType) {
     std::string output;
@@ -65,6 +67,9 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case DataType::CANDLESTICK:
         output = "CANDLESTICK";
+        break;
+      case DataType::MARK_PRICE:
+        output = "MARK_PRICE";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);
@@ -86,6 +91,11 @@ class MarketDataMessage CCAPI_FINAL {
     QUOTE_VOLUME = 11,
     AGG_TRADE_FIRST_ID = 12,
     AGG_TRADE_LAST_ID = 13,
+    MARK_PRICE = 14,
+    SPOT_INDEX_PRICE = 15,
+    PREDICTED_SETTLEMENT_PRICE = 16,
+    FUNDING_RATE = 17,
+    NEXT_FUNDING_RATE_TIME = 18,
   };
   static std::string dataFieldTypeToString(DataFieldType dataFieldType) {
     std::string output;
@@ -131,6 +141,21 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case DataFieldType::AGG_TRADE_LAST_ID:
         output = "AGG_TRADE_LAST_ID";
+        break;
+      case DataFieldType::MARK_PRICE:
+        output = "MARK_PRICE";
+        break;
+      case DataFieldType::SPOT_INDEX_PRICE:
+        output = "SPOT_INDEX_PRICE";
+        break;
+      case DataFieldType::PREDICTED_SETTLEMENT_PRICE:
+        output = "PREDICTED_SETTLEMENT_PRICE";
+        break;
+      case DataFieldType::FUNDING_RATE:
+        output = "FUNDING_RATE";
+        break;
+      case DataFieldType::NEXT_FUNDING_RATE_TIME:
+        output = "NEXT_FUNDING_RATE_TIME";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);
@@ -196,6 +221,9 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case Type::MARKET_DATA_EVENTS_CANDLESTICK:
         output = "MARKET_DATA_EVENTS_CANDLESTICK";
+        break;
+      case Type::MARKET_DATA_EVENTS_MARK_PRICE:
+        output = "MARKET_DATA_EVENTS_MARK_PRICE";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);

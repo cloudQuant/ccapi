@@ -5,4 +5,4 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 add_test(AllTestsInMain "main")
-set_tests_properties(AllTestsInMain PROPERTIES  _BACKTRACE_TRIPLES "/Users/yunjinqi/Documents/ccapi/tests/CMakeLists.txt;52;add_test;/Users/yunjinqi/Documents/ccapi/tests/CMakeLists.txt;0;")
+set_tests_properties(AllTestsInMain PROPERTIES  _BACKTRACE_TRIPLES "/Users/yunjinqi/Documents/ccapi/tests/CMakeLists.txt;56;add_test;/Users/yunjinqi/Documents/ccapi/tests/CMakeLists.txt;0;")

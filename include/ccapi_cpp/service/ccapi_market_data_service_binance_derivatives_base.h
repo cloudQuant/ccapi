@@ -20,6 +20,7 @@ class MarketDataServiceBinanceDerivativesBase : public MarketDataServiceBinanceB
                                  const Subscription& subscription, const std::map<std::string, std::string> optionMap) override {
     auto marketDepthRequested = std::stoi(optionMap.at(CCAPI_MARKET_DEPTH_MAX));
     auto conflateIntervalMilliseconds = std::stoi(optionMap.at(CCAPI_CONFLATE_INTERVAL_MILLISECONDS));
+
     if (field == CCAPI_MARKET_DEPTH) {
       int marketDepthSubscribedToExchange = 1;
       marketDepthSubscribedToExchange = this->calculateMarketDepthAllowedByExchange(marketDepthRequested, std::vector<int>({1, 5, 10, 20}));
@@ -42,6 +43,8 @@ class MarketDataServiceBinanceDerivativesBase : public MarketDataServiceBinanceB
       std::string interval =
           this->convertCandlestickIntervalSecondsToInterval(std::stoi(optionMap.at(CCAPI_CANDLESTICK_INTERVAL_SECONDS)), "s", "m", "h", "d", "w");
       channelId = channelId + "_" + interval;
+    }
+    else if (field == CCAPI_MARK_PRICE){
     }
   }
   void extractInstrumentInfo(Element& element, const rj::Value& x) {
