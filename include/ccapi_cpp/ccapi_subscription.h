@@ -49,7 +49,12 @@ class Subscription CCAPI_FINAL {
     } else if (std::includes(executionManagementSubscriptionFieldSet.begin(), executionManagementSubscriptionFieldSet.end(), this->fieldSet.begin(),
                              this->fieldSet.end())) {
       this->serviceName = CCAPI_EXECUTION_MANAGEMENT;
-    } else if (field == CCAPI_MARKET_DEPTH || field == CCAPI_TRADE || field == CCAPI_AGG_TRADE || field == CCAPI_CANDLESTICK || field == CCAPI_MARK_PRICE) {
+    } else if (field == CCAPI_MARKET_DEPTH ||
+               field == CCAPI_TRADE ||
+               field == CCAPI_AGG_TRADE ||
+               field == CCAPI_CANDLESTICK ||
+               field == CCAPI_MARK_PRICE ||
+               field == CCAPI_FORCE_ORDER) {
       this->serviceName = CCAPI_MARKET_DATA;
     }
     CCAPI_LOGGER_TRACE("this->serviceName = " + this->serviceName);

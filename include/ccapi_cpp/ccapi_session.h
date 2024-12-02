@@ -658,6 +658,8 @@ class Session {
     for (const auto& x : subscriptionListByServiceNameMap) {
       auto serviceName = x.first;
       auto subscriptionList = x.second;
+      std::cout << "serviceName = " << serviceName << std::endl;
+      // std::cout << "subscriptionList[0] = " <<subscriptionList[0] << std::endl;
       if (this->serviceByServiceNameExchangeMap.find(serviceName) == this->serviceByServiceNameExchangeMap.end()) {
         this->onError(Event::Type::SUBSCRIPTION_STATUS, Message::Type::SUBSCRIPTION_FAILURE,
                       "please enable service: " + serviceName + ", and the exchanges that you want");

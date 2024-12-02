@@ -476,7 +476,9 @@ class MarketDataService : public Service {
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_TRADE ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_AGG_TRADE ||
           marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_CANDLESTICK ||
-          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARK_PRICE) {
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_MARK_PRICE ||
+          marketDataMessage.type == MarketDataMessage::Type::MARKET_DATA_EVENTS_FORCE_ORDER
+          )  {
         // if (this->sessionOptions.warnLateEventMaxMilliseconds > 0 &&
         //     std::chrono::duration_cast<std::chrono::milliseconds>(timeReceived - marketDataMessage.tp).count() >
         //         this->sessionOptions.warnLateEventMaxMilliseconds &&
@@ -564,6 +566,11 @@ class MarketDataService : public Service {
           bool isSolicited = marketDataMessage.recapType == MarketDataMessage::RecapType::SOLICITED;
           this->processExchangeProvidedMarkPrice(wsConnection, channelId, symbolId, event, marketDataMessage.tp, timeReceived, marketDataMessage.data, field,
                                                    optionMap, correlationIdList, isSolicited);
+        }
+        if (marketDataMessage.data.find(MarketDataMessage::DataType::FORCE_ORDER) != marketDataMessage.data.end()){
+          bool isSolicited = marketDataMessage.recapType == MarketDataMessage::RecapType::SOLICITED;
+          this->processExchangeProvidedForceOrder(wsConnection, channelId, symbolId, event, marketDataMessage.tp, timeReceived, marketDataMessage.data, field,
+                                                 optionMap, correlationIdList, isSolicited);
         }
       } else {
         CCAPI_LOGGER_WARN("websocket event type is unknown for " + toString(marketDataMessage));
@@ -1470,6 +1477,73 @@ class MarketDataService : public Service {
       Message message;
       message.setTimeReceived(timeReceived);
       message.setType(Message::Type::MARKET_DATA_EVENTS_MARK_PRICE);
+      message.setRecapType(isSolicited ? Message::RecapType::SOLICITED : Message::RecapType::NONE);
+      message.setTime(tp);
+      message.setElementList(elementList);
+      message.setCorrelationIdList(correlationIdList);
+      message.setSymbolId(symbolId);
+      messageList.emplace_back(std::move(message));
+    }
+    if (!messageList.empty()) {
+      event.addMessages(messageList);
+    }
+  }
+
+  void processExchangeProvidedForceOrder(const WsConnection& wsConnection, const std::string& channelId, const std::string& symbolId, Event& event,
+                                        const TimePoint& tp, const TimePoint& timeReceived, MarketDataMessage::TypeForData& input, const std::string& field,
+                                        const std::map<std::string, std::string>& optionMap, const std::vector<std::string>& correlationIdList,
+                                        bool isSolicited) {
+    std::vector<Message> messageList;
+    std::vector<Element> elementList;
+    if (field == CCAPI_FORCE_ORDER) {
+      for (auto& x : input) {
+        auto& type = x.first;
+        auto& detail = x.second;
+        // std::cout << "type = " << MarketDataMessage::dataTypeToString(type) << std::endl;
+        // std::vector<std::map<DataFieldType, std::string> >
+        // std::cout << "detail size = " << detail.size() << std::endl;
+        if (type == MarketDataMessage::DataType::FORCE_ORDER) {
+          for (auto& y : detail) {
+            auto& order_side = y.at(MarketDataMessage::DataFieldType::ORDER_SIDE);
+            auto& order_type = y.at(MarketDataMessage::DataFieldType::ORDER_TYPE);
+            auto& order_force = y.at(MarketDataMessage::DataFieldType::ORDER_FORCE);
+            auto& order_qty = y.at(MarketDataMessage::DataFieldType::ORDER_QTY);
+            auto& order_price = y.at(MarketDataMessage::DataFieldType::ORDER_PRICE);
+            auto& order_avg_price = y.at(MarketDataMessage::DataFieldType::ORDER_AVG_PRICE);
+            auto& order_status = y.at(MarketDataMessage::DataFieldType::ORDER_STATUS);
+            auto& order_last_trade_qty = y.at(MarketDataMessage::DataFieldType::ORDER_LAST_TRADE_QTY);
+            auto& order_cumsum_trade_qty = y.at(MarketDataMessage::DataFieldType::ORDER_CUMSUM_TRADE_QTY);
+
+            Element element;
+            std::string k1("order_side");
+            std::string k2("order_type");
+            std::string k3("order_force");
+            std::string k4("order_qty");
+            std::string k5("order_price");
+            std::string k6("order_avg_price");
+            std::string k7("order_status");
+            std::string k8("order_last_trade_qty");
+            std::string k9("order_cumsum_trade_qty");
+            element.emplace(k1, order_side);
+            element.emplace(k2, order_type);
+            element.emplace(k3, order_force);
+            element.emplace(k4, order_qty);
+            element.emplace(k5, order_price);
+            element.emplace(k6, order_avg_price);
+            element.emplace(k7, order_status);
+            element.emplace(k8, order_last_trade_qty);
+            element.emplace(k9, order_cumsum_trade_qty);
+            elementList.emplace_back(std::move(element));
+          }
+        } else {
+          CCAPI_LOGGER_WARN("extra type " + MarketDataMessage::dataTypeToString(type));
+        }
+      }
+    }
+    if (!elementList.empty()) {
+      Message message;
+      message.setTimeReceived(timeReceived);
+      message.setType(Message::Type::MARKET_DATA_EVENTS_FORCE_ORDER);
       message.setRecapType(isSolicited ? Message::RecapType::SOLICITED : Message::RecapType::NONE);
       message.setTime(tp);
       message.setElementList(elementList);

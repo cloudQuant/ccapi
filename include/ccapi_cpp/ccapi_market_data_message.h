@@ -19,6 +19,7 @@ class MarketDataMessage CCAPI_FINAL {
     MARKET_DATA_EVENTS_AGG_TRADE,
     MARKET_DATA_EVENTS_CANDLESTICK,
     MARKET_DATA_EVENTS_MARK_PRICE,
+    MARKET_DATA_EVENTS_FORCE_ORDER,
   };
   enum class RecapType {
     UNKNOWN,
@@ -49,6 +50,7 @@ class MarketDataMessage CCAPI_FINAL {
     AGG_TRADE = 3,
     CANDLESTICK = 4,
     MARK_PRICE = 5,
+    FORCE_ORDER = 6,
   };
   static std::string dataTypeToString(DataType dataType) {
     std::string output;
@@ -70,6 +72,9 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case DataType::MARK_PRICE:
         output = "MARK_PRICE";
+        break;
+      case DataType::FORCE_ORDER:
+        output = "FORCE_ORDER";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);
@@ -96,6 +101,15 @@ class MarketDataMessage CCAPI_FINAL {
     PREDICTED_SETTLEMENT_PRICE = 16,
     FUNDING_RATE = 17,
     NEXT_FUNDING_RATE_TIME = 18,
+    ORDER_SIDE = 19,
+    ORDER_TYPE = 20,
+    ORDER_FORCE = 21,
+    ORDER_QTY = 22,
+    ORDER_PRICE = 23,
+    ORDER_AVG_PRICE = 24,
+    ORDER_STATUS = 25,
+    ORDER_LAST_TRADE_QTY = 26,
+    ORDER_CUMSUM_TRADE_QTY = 27,
   };
   static std::string dataFieldTypeToString(DataFieldType dataFieldType) {
     std::string output;
@@ -156,6 +170,33 @@ class MarketDataMessage CCAPI_FINAL {
         break;
       case DataFieldType::NEXT_FUNDING_RATE_TIME:
         output = "NEXT_FUNDING_RATE_TIME";
+        break;
+      case DataFieldType::ORDER_SIDE:
+        output = "ORDER_SIDE";
+        break;
+      case DataFieldType::ORDER_TYPE:
+        output = "ORDER_TYPE";
+        break;
+      case DataFieldType::ORDER_FORCE:
+        output = "ORDER_FORCE";
+        break;
+      case DataFieldType::ORDER_QTY:
+        output = "ORDER_QTY";
+        break;
+      case DataFieldType::ORDER_PRICE:
+        output = "ORDER_PRICE";
+        break;
+      case DataFieldType::ORDER_AVG_PRICE:
+        output = "ORDER_AVG_PRICE";
+        break;
+      case DataFieldType::ORDER_STATUS:
+        output = "ORDER_STATUS";
+        break;
+      case DataFieldType::ORDER_LAST_TRADE_QTY:
+        output = "ORDER_LAST_TRADE_QTY";
+        break;
+      case DataFieldType::ORDER_CUMSUM_TRADE_QTY:
+        output = "ORDER_CUMSUM_TRADE_QTY";
         break;
       default:
         CCAPI_LOGGER_FATAL(CCAPI_UNSUPPORTED_VALUE);
